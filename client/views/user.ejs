@@ -1,0 +1,32 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Update Profile</h1>
+            <p class="lead">Please update user profile below.</p>
+            <form>
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter email" ng-model="currentUser.email" ng-required="true">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Password" ng-model="currentUser.password" ng-required="true">
+                </div>
+                <div class="form-group">
+                    <label for="confirm-password">Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" placeholder="Confirm Password" ng-model="currentUser.confirmPassword" ng-required="true">
+                </div>
+                <div class="form-group" ng-if="is_admin">
+                    <label for="permission_level">Permission Level</label>
+                    <select name="permission_level" class="form-control" ng-model="currentUser.permission_level">
+                        <option value="REGULAR">REGULAR</option>
+                        <option value="MANAGER">MANAGER</option>
+                        <option value="ADMIN">ADMIN</option>
+                    </select>
+                </div>
+                <button type="button" class="btn btn-primary" ng-click="confirmUpdateUser()">Update</button>
+                <button type="button" class="btn btn-danger" ng-click="cancel()">Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,83 @@
+<div class="container" ng-show="logged_in" ng-controller="recordController">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Time Entry</h1>
+            <p class="lead" ng-show="!currentUpdateRecord">Create a time entry below.</p>
+            <p class="lead" ng-show="currentUpdateRecord">Update time entry below.</p>
+            <form name="recordForm" id="recordForm" novalidate>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <label for="recordDate">Date</label>
+                                    <input ng-show="!currentUpdateRecord" type="text" class="form-control" id="recordDate" placeholder="Enter date" ng-model="recordDate" ng-required="!currentUpdateRecord" max="9999-12-31"/>
+                                    <input ng-show="currentUpdateRecord" type="text" class="form-control" id="updateRecordDate" ng-required="currentUpdateRecord" max="9999-12-31"/>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <label for="meters">Kilometers</label>
+                                    <input ng-show="!currentUpdateRecord" type="text" class="form-control" id="kms" placeholder="0" ng-model="kms" ng-required="!meters" maxLength="10">
+                                    <input ng-show="currentUpdateRecord" type="text" class="form-control" id="updateKms" ng-model="currentUpdateRecord.kms" ng-required="!currentUpdateRecord.meters" maxLength="10">
+                                </div>
+                                <div class="col-xs-4">
+                                    <label for="meters">Meters</label>
+                                    <input ng-show="!currentUpdateRecord" type="text" class="form-control" id="meters" placeholder="0" ng-model="meters" ng-required="!kms" maxLength="3">
+                                    <input ng-show="currentUpdateRecord" type="text" class="form-control" id="updateMeters" placeholder="0" ng-model="currentUpdateRecord.meters" ng-required="!currentUpdateRecord.kms" maxLength="3">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <div class="row">
+                                <div class="col-xs-4">
+                                    <label for="minutes">Minutes</label>
+                                    <input ng-show="!currentUpdateRecord" type="text" class="form-control" id="minutes" placeholder="0" ng-model="minutes" ng-required="!seconds" maxLength="10">
+                                    <input ng-show="currentUpdateRecord" type="text" class="form-control" id="updateMinutes" placeholder="0" ng-model="currentUpdateRecord.minutes" ng-required="!updateSeconds" maxLength="10">
+                                </div>
+                                <div class="col-xs-4">
+                                    <label for="seconds">Seconds</label>
+                                    <input ng-show="!currentUpdateRecord" type="text" class="form-control" id="seconds" placeholder="0" ng-model="seconds" ng-required="!minutes" maxLength="2">
+                                    <input ng-show="currentUpdateRecord" type="text" class="form-control" id="updateSeconds" placeholder="0" ng-model="currentUpdateRecord.seconds" ng-required="!updateMinutes" maxLength="2">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-xs-8">
+                            <div class="row">
+                                <div class="col-xs-8">
+                                    <label for="location">Location</label>
+                                    <input ng-show="!currentUpdateRecord" type="text" class="form-control" id="location" placeholder="0" ng-model="location" ng-required="!location" maxLength="50"  ng-change="showMap()">
+                                    <input ng-show="currentUpdateRecord" type="text" class="form-control" id="updateLocation" placeholder="0" ng-model="currentUpdateRecord.location" ng-required="!updateLocation" maxLength="50" ng-change="updateMap()" >
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="row">
+                        <div id="map" style="height: 400px;width: 100%;"></div>
+                    </div>
+                </div>
+                
+
+                <button ng-click="createRecord()" ng-show="!currentUpdateRecord" type="button" class="btn btn-info">Create Record!</button>
+                <button ng-click="confirmUpdateRecord()" ng-show="currentUpdateRecord" type="submit" class="btn btn-primary">Update Record!</button>
+                <button type="button" class="btn btn-danger" ng-click="cancel()">Cancel</button>
+            </form>
+        </div>
+    </div>
+</div>

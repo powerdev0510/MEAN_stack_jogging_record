@@ -1,0 +1,32 @@
+<div class="container" ng-if="is_manager || is_admin">
+    <div class="row">
+        <div class="col-md-12 col-xs-12">
+            <h1>Users</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th class="col-md-2">User ID</th>
+                    <th class="col-md-2">Email</th>
+                    <th class="col-md-2">Permission Level</th>
+                    <th class="col-md-1">Actions</th>
+                    <th class="col-md-2"></th>
+                </tr>
+                </thead>
+                <tr ng-repeat="user in users">
+                    <td>{{user._id}}</td>
+                    <td>{{user.email}}</td>
+                    <td>{{user.permission_level}}</td>
+                    <td>
+                        <span title="Update User" class="glyphicon glyphicon-pencil" ng-click="updateUser(user)"></span>
+                        <span title="Remove User" class="glyphicon glyphicon-remove" ng-click="removeUserConfirm(user)"></span>
+                        <span ng-if="is_admin" title="View User Records" class="glyphicon glyphicon-list" ng-click="listRecords(user)"></span>
+                    </td>
+                    <td style="text-align: left">
+                        <button ng-show="user.confirmDelete" type="button" class="btn btn-danger btn-sm" ng-click="removeUser(user)">Confirm</button>
+                        <button ng-show="user.confirmDelete" type="button" class="btn btn-danger btn-sm" ng-click="hideUserConfirmDelete(user)">X</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,82 @@
+<div class="container" ng-show="logged_in">
+    <div class="row">
+        <div class="col-md-12 col-xs-12">
+            <div class="row">
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="startDate">Records starting from: </label>
+                        <input type="text" class="form-control" id="startDate" max="9999-12-31" ng-model="startDate.value">
+                        <div class="alert alert-danger" ng-show="startMessage">
+                            {{startMessage}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class="form-group">
+                        <label for="endDate">Records ending on: </label>
+                        <input type="text" class="form-control" id="endDate" max="9999-12-31" ng-model="endDate.value">
+                        <div class="alert alert-danger" ng-show="endMessage">
+                            {{endMessage}}
+                        </div>
+                    </div>
+                </div>
+                <div class="col-xs-4">
+                    <div class='btn-toolbar'>
+                        <br/>
+                        <button type='button' class='btn btn-primary' ng-click="updateRecords()">Update</button>
+                        <button type='button' class='btn btn-danger' ng-click="resetRecords()">Reset</button>
+                    </div>
+                </div>
+            </div>
+            <h1>Records</h1>
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th class="col-md-2">Date</th>
+                        <th class="col-md-1">Distance</th>
+                        <th class="col-md-1">Time</th>
+                        <th class="col-md-2">Average Speed</th>
+                        <th class="col-md-2">Location</th>
+                        <th class="col-md-1">Actions</th>
+                        <th class="col-md-2"></th>
+                    </tr>
+                </thead>
+                <tr ng-repeat="record in records">
+                    <td>{{record.dateStr}}</td>
+                    <td>{{prettyDistance(record.meters)}}</td>
+                    <td>{{prettyTime(record.seconds)}}</td>
+                    <td>{{getAverageSpeed(record)}}km/h</td>
+                    <td>
+                        {{record.location}}
+                    </td>
+                    <td>
+                        <span title="Update Record" class="glyphicon glyphicon-pencil" ng-click="updateRecord(record)"></span>
+                        <span title="Remove Record" class="glyphicon glyphicon-remove" ng-click="removeRecordConfirm(record)"></span>
+                    </td>
+                    
+                    <td style="text-align: left">
+                        <button ng-show="record.confirmDelete" type="button" class="btn btn-danger btn-sm" ng-click="removeRecord(record)">Confirm</button>
+                        <button ng-show="record.confirmDelete" type="button" class="btn btn-danger btn-sm" ng-click="hideConfirmDelete(record)">X</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-8">
+            <p class="lead"><span ng-if="averageSpeed >= 0">Average speed: {{averageSpeed}} km/h</span><br/>
+                <span ng-if="averageDistance >= 0">Average distance: {{averageDistance}} meters</span> <span ng-if="averageKMs > 0">(~{{averageKMs}} kilometers)</span> <br/> <br/>
+                <span ng-if="averageSpeed >= 0" style="font-weight:bold">Static Values</span><br/>
+                <span ng-if="averageSpeed >= 0">Total Time Jogging: {{totalTime}} s </span><br/>
+                <span ng-if="averageSpeed >= 0">Top Distance Jogging: {{maxDistance}} meters <span ng-if="maxDistanceKMs > 0">(~{{maxDistanceKMs}} kilometers)</span> </span><br/>
+                <span ng-if="averageSpeed >= 0">Fastest Jogging Speed: {{fastSpeed}} km/h </span><br/>
+                <span ng-if="averageSpeed >= 0">Slowest Jogging Speed: {{slowSpeed}} km/h </span><br/>
+                
+            </p><br/>
+                
+            <div class='btn-toolbar'>
+                <button type='button' class='btn btn-primary' ng-click="createRecordPage()">Create New Record</button>
+            </div>
+        </div>
+    </div>
+</div>

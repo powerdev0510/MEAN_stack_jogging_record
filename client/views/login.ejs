@@ -1,0 +1,19 @@
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h1>Login</h1>
+            <p class="lead">Don't have an account? Please <a href="/register">register</a> here.</p>
+            <form ng-controller="loginController" ng-submit="onSubmit()">
+                <div class="form-group">
+                    <label for="email">Email address</label>
+                    <input type="email" class="form-control" id="email" placeholder="Enter email" ng-model="email" ng-required="true">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Password" ng-model="password" ng-required="true">
+                </div>
+                <button type="submit" ng-submit="onSubmit()" class="btn btn-primary">Login!</button>
+            </form>
+        </div>
+    </div>
+</div>
